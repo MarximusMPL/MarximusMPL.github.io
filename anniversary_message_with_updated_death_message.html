@@ -1,0 +1,202 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Anniversary</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+            background-color: #ffebf2;
+            background-image: url('https://www.transparenttextures.com/patterns/old-moon.png');
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+            display: inline-block;
+            border: 5px solid #ff6699;
+        }
+        h1 {
+            color: #ff3366;
+            font-size: 30px;
+        }
+        h2 {
+            color: #cc0052;
+            font-size: 24px;
+        }
+        p {
+            font-size: 18px;
+            color: #333;
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+        button {
+            padding: 12px 25px;
+            font-size: 18px;
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .yes {
+            background-color: #ff3366;
+            color: white;
+            box-shadow: 0 4px 8px rgba(255, 51, 102, 0.5);
+        }
+        .yes:hover {
+            background-color: #cc0052;
+        }
+        .no {
+            background-color: #999;
+            color: white;
+            position: absolute;
+        }
+        .heart {
+            color: red;
+            font-size: 30px;
+            animation: heartbeat 1s infinite alternate;
+        }
+        @keyframes heartbeat {
+            from { transform: scale(1); }
+            to { transform: scale(1.2); }
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(255, 51, 102, 0.5);
+            text-align: center;
+            width: 300px;
+        }
+        .popup h3 {
+            color: #ff3366;
+        }
+        .popup button {
+            background: #ff6699;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        #noMessage {
+            margin-top: 10px;
+            font-size: 18px;
+            color: #ff3366;
+            font-weight: bold;
+        }
+        .deathPopup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #f8d7da;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(255, 51, 102, 0.5);
+            text-align: center;
+            width: 300px;
+        }
+        .deathPopup h3 {
+            color: #721c24;
+            font-size: 24px;
+        }
+        .deathPopup p {
+            color: #721c24;
+            font-size: 18px;
+        }
+        .deathPopup button {
+            background: #c82333;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Happy Anniversary Mydinobaby <span class="heart">❤️</span></h1>
+        <p>Hi babyy, thank you so much for staying with me through all the hardships I've faced. I am very grateful for all the things that you did for me. Mahal na mahal kita baby, sana wag kang magbago, mag-stay ka lang na ganyan at saka please babaan mo na pride mo hehe. 1 year na tayo oh baka naman. ❤️</p>
+        <h2>Will you stay forever and ever with me?</h2>
+        <div class="buttons">
+            <button class="yes" onclick="yesClicked()">YES</button>
+            <button class="no" onclick="moveNoButton()">NO</button>
+        </div>
+        <p id="noMessage"></p>
+    </div>
+
+    <div id="popup" class="popup">
+        <h3>YEYYYY THANKYU VERY VERY MUCH LOVEYOW ❤️</h3>
+        <button onclick="closePopup()">Close</button>
+    </div>
+
+    <div id="deathPopup" class="deathPopup">
+        <h3>💔 Bambam has died because of heartbrokenness 💔</h3>
+        <p>wala na patay na baby mo epal ka kase e🫩🫩🫩</p>
+        <button onclick="closeDeathPopup()">Close</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script>
+        let noMessages = [
+            "why?", "why??", "WHY???", "sad nako☹️", "ay☹️☹️☹️", "di na kita bate☹️", "okay dewag", "OKAY", "oks", 
+            "bahala kanga dyan", "ge lang encar", "mga encar cantos talaga e", "wala ka talagang kiss tamo", 
+            "e mag hiwalay nalang kung ganyan", "lahh ayaw talaga☹️", "ge."
+        ];
+        let messageIndex = 0;
+
+        function yesClicked() {
+            // Show the popup
+            document.getElementById("popup").style.display = "block";
+
+            // Trigger confetti
+            confetti.start();
+
+            // Stop confetti after 5 seconds
+            setTimeout(() => {
+                confetti.stop();
+            }, 5000);
+        }
+
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+        }
+
+        function moveNoButton() {
+            if (messageIndex < noMessages.length) {
+                document.getElementById("noMessage").innerText = noMessages[messageIndex];
+                messageIndex++;
+                const noButton = document.querySelector(".no");
+                const x = Math.random() * (window.innerWidth - 100);
+                const y = Math.random() * (window.innerHeight - 50);
+                noButton.style.left = `${x}px`;
+                noButton.style.top = `${y}px`;
+            } else {
+                document.getElementById("deathPopup").style.display = "block";
+            }
+        }
+
+        function closeDeathPopup() {
+            document.getElementById("deathPopup").style.display = "none";
+        }
+    </script>
+</body>
+</html>
